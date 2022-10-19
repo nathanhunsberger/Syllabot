@@ -1,9 +1,10 @@
 from PyPDF2 import PdfReader
 import re
 from datetime import datetime
-
-reader = PdfReader("../tests/MATH 3670 Syllabus.pdf")
-page = reader.pages[0]
+test1 = "../tests/MATH 3670 Syllabus With More.pdf"
+test2 = "../tests/Syllabus_2022_FaLL_final.pdf"
+reader = PdfReader(test2)
+page = reader.pages[3]
 contents = page.extract_text()
 #locates required content
 contents = re.sub(r"[Jj]anuary", "Jan", contents)
@@ -28,41 +29,46 @@ contents = re.sub(r"[Dd]ecember", "Dec", contents)
 #         return False
 
 # text = re.sub('\d{4}-\d{2}-\d{2}', '', text).strip()
+
 class Date:
     def __init__(self, date, type):
-        self.date = date
+        self.date_str = date
         self.type = type
+        self.date = self.getDate()
+
+    def getDate(self):
+        if self.type == 3:
+            return self.date_str
+        date_str = self.date_str
+        if self.type == 1:
+            # for month in months:
+            #     if month in date_str:
+            #         new_date = date_str.split(month)
+            #         orig = new_date[0]
+            #         date_str = month + new_date[1]
+            new_date = re.findall(r"(Jan|Feb|Mar|Apr|May|Jun|Aug|Sep|Oct|Nov|Dec) (\d+)", date_str)[0]
+            new_date = new_date[0] + " " + new_date[1]
+            orig = date_str.replace(new_date, "")
+            perfect_date = datetime.strptime(new_date, '%b %d').date()
+            return orig + perfect_date.strftime("%m/%d")
+        elif self.type == 2:
+            new_date = re.findall(r"\d{1,2}-\d{1,2}", date_str)[0]
+            orig = date_str.replace(new_date, "")
+            perfect_date = datetime.strptime(new_date, '%m-%d').date()
+            return orig + perfect_date.strftime("%m/%d")
 dates = []
 for line in contents.split("\n"):
     # Type 1 is Dec 29, Sep 2, Nov 4 for example
-    if re.search(r"Jan|Feb|Mar|Apr|May|Jun|Aug|Sep|Oct|Nov|Dec| \. (\d+)", line):
-        dates.append(Date(line, 1))
+    if re.search(r"(Jan|Feb|Mar|Apr|May|Jun|Aug|Sep|Oct|Nov|Dec) (\d+)", line):
+        print(line)
+        dates.append(Date(line, 1).date)
     # Type 2 is mm-dd
-    elif re.search(r"\d{2}-\d{2}", line):
-        dates.append(Date(line, 2))
+    elif re.search(r"\d{1,2}-\d{1,2}", line):
+        dates.append(Date(line, 2).date)
     # Type 3 is mm/dd
-    elif re.search(r"\d{2}\\\d{2}", line):
-        dates.append(Date(line, 3))
+    elif re.search(r" \d{1,2}/\d{1,2} ", line) or re.search(r"\d{1,2}/\d{1,2} ", line) or re.search(r" \d{1,2}/\d{1,2}", line):
+        dates.append(Date(line, 3).date)
 months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-perfect_dates = []
-# "Asaignemnt Dec 29"
-def getDate(date):
-    if date.type == 3:
-        return date
-    orig = ""
-    date_str = date.date
-    for month in months:
-        if month in date_str:
-            new_date = date_str.split(month)
-            orig = new_date[0]
-            date_str = month + new_date[1]
-    if date.type == 1:
-        perfect_date = datetime.strptime(date_str, '%b %d').date()
-        return orig + perfect_date.strftime("%m/%d")
-    perfect_date = datetime.strptime(date_str, '%b-%d').date()
-    return orig + perfect_date.strftime("%m/%d")
-for date in dates:
-    orig = getDate(date)
-    perfect_dates.append(orig)
-print(perfect_dates)
+
+print(dates)
 #print(page.extract_text())
