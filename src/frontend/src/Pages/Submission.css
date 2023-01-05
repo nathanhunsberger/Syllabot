@@ -1,0 +1,23 @@
+.upload{
+    position: absolute;
+    align-items: right;
+    top: 40%;
+    right: 30%;
+    background-color: black;
+    color: white;
+    height: 40px;
+    width: 140px;
+    border-radius: 5px;
+    font-size: large;
+    text-align: center;
+    padding-top: 15px;
+}
+.error_message{
+    color: red;
+    position: absolute;
+    top: 45%;
+    right: 20%;
+}
+input[type="file"] {
+    display: none;
+}

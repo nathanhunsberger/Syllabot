@@ -1,0 +1,132 @@
+import Signin from './Signin';
+import { useState} from 'react';
+import Submission  from './Submission';
+import Dashboard from './Dashboard';
+import Calendar from './Calendar';
+import './Home.css'
+import logo from '../Images/basic_logo.png'
+function Home(){
+    
+   
+    const [assignments, setAssignments] = useState(
+        [ 
+        // { id: 1, name: "Test 1",  date: "10/5" },
+        // { id: 2, name: "Hw 2",  date: "12/20" },
+        // { id: 3, name: "Essay 3", date: "11/19"},
+    ]
+    );
+    const [numAssignments, setNumAssignments] = useState(0);
+    const [submitted, setSubmitted] = useState(false);
+    const [user, setUser] = useState({});
+
+
+    function onNameChange(e,index){
+        let newArr = [...assignments]
+        newArr[index].name = e;
+        setAssignments(newArr);
+        
+    }
+
+    function onDateChange(e,index){
+        let newArr = [...assignments]
+        newArr[index].date = e;
+        setAssignments(newArr);
+    }
+    function onDelete(index){
+        let newArr = [...assignments]
+        newArr.splice(index,1);
+        setAssignments(newArr);
+    }
+    function onAdd(){
+        setNumAssignments(numAssignments + 1);
+        let newArr = [...assignments];
+        newArr.push({
+            id:numAssignments + 1, name: "", date: ""
+        })
+        setAssignments(newArr);
+    }
+//    function handleProfile(p){
+//      setProfile(p)
+//    }
+
+   function onSubmit(){
+    setSubmitted(true);
+   }
+
+   function wipeAssignments(){
+    setAssignments([]);
+   }
+
+   function handleAssignmets(a){
+    setAssignments(a);
+    setNumAssignments(a.length);
+   }
+//    return (
+//     <div>
+//         <Dashboard assignments = {assignments}/>
+//     </div>
+//    )
+   if (assignments.length > 0){
+    if (submitted){
+        return(<Calendar user = {user} setUser = {setUser} wipeAssignments = {wipeAssignments} />)
+    }else {
+        return (
+            <Dashboard assignments = {assignments} onNameChange={onNameChange} onDateChange = {onDateChange} onDelete = {onDelete} onAdd = {onAdd} 
+            onSubmit = {onSubmit}/>
+        );
+    }
+   }
+    else {
+        return(
+            <div >
+                <div className= 'basic_logo'>
+                <img className= 'logo_img' src = {logo} alt = "Syllabot Logo"/>
+                <p className = 'logo_caption'>school simplified</p>
+                </div>
+
+                {/* <div className='middle_row'/> */}
+                <div className = 'middle_row'>
+                    <h1 className='header_message'>
+                        Upload your syllabus.
+                    </h1>
+                    <h1 className='header_message'>
+                        We'll make it useful.
+                    </h1>
+                    <Submission assignments = {assignments} onChange = {handleAssignmets}/>
+                </div>
+                <br></br>
+                <div className = 'boxes_row'>
+                    <div className= 'info_box left_box'>
+                        <h1 className = 'title'>what does syllabot do?</h1>
+                        <h2 className = 'content'>
+                            syllabot reads your syllabus and returns tasks directly to your Google, Outlook, or Apple calendars!...
+                        </h2>
+                    </div>
+                    <div className= 'info_box right_box'>
+                        <h1 className = 'title'>how does it work?</h1>
+                        <h2 className = 'content'>
+                            syllabot is a machine learning algorithm! it recognizes important information and turns it into useful data for you!...
+                        </h2>
+                    </div>
+                </div>
+                <br></br>
+                <h1>Questions, feedback, problems, or concerns?</h1>
+                <p>Please reach out! We want to hear directly from students and professors as</p>
+                it helps us to improve the platform and make life a little more organized
+                <p>jonah, ben, and nate :)</p>
+            </div>
+        );
+                
+                
+                {/* <Signin profile = {profile} onChange = {handleProfile}/>
+                {
+                    profile && profile.email &&
+                    <button
+                        onClick = {() =>{
+                            setConfirmed(true);
+                        }}>Submit a Syllabus
+                    </button>
+                } */}
+            
+    }
+}export default Home;

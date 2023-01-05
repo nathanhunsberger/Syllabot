@@ -1,0 +1,78 @@
+.basic_logo{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    height: 90px;
+    
+}
+
+.logo_img{
+    position: absolute;
+    padding: 0px;
+    height: 60px;
+}
+.logo_caption{
+    position: absolute;
+    top: 45px;
+    left: 15px;
+    text-align: left;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.middle_row{
+    position: relative;
+    height: 80px;
+    /* background-color: aqua; */
+}
+
+.header_message{
+    font-size: xx-large;
+    font-weight: 400;
+    text-align: left;
+    margin-left: 30%;
+}
+
+.boxes_row{
+    height: 280px;
+    position: relative;
+    
+}
+.info_box{
+    height: 80%;
+    width: 18%;
+    background-color: gray;
+    position: absolute;
+    top: 20%;
+    padding: 10px;
+}
+.left_box{
+    left: 25%; 
+}
+
+.right_box{
+    left: 55%;
+}
+
+.title {
+    color:white;
+    font-size: x-large;
+    font-weight: bold;
+    text-align: left;
+    font-style: italic;
+}
+.content {
+    font-size: 17pt;
+    color: white;
+    text-align: left;
+    font-weight: 600;
+}
+
+
+    
+/* div{
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+} */

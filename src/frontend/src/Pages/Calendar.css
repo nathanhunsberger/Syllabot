@@ -1,0 +1,45 @@
+.body{
+    align-content: center;
+    display: flex;
+    justify-content: center;
+}
+
+.logo{
+    height: 100px;
+}
+
+.mid_row{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.spacer{
+    width: 20px;
+}
+.sign_out{
+    background-color: black;
+    color: white;
+    height: 30px;
+    width: 100px;
+    border-radius: 5px;
+    font-size: small;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.profile_pic{
+    height: 30px;
+    padding-right: 10px;
+}
+
+.generate_events{
+    background-color: black;
+    color: white;
+    height: 30px;
+    width: 120px;
+    border-radius: 5px;
+    font-size: small;
+    text-align: center;
+}

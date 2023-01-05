@@ -1,0 +1,71 @@
+.logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    height: 100px;
+}
+.top_header{
+    font-style: italic;
+    text-align: center;
+}
+
+.bottom_header{
+    text-align:center;
+}
+.class_holder{
+    display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  justify-content: center;
+  align-items: center;
+}
+.class_input{
+    width:375px;
+    border-width: 0;
+    background-color: lightgray;
+    text-align: center;
+    border-radius: 0px;
+    font-weight: bold;
+    color:black;
+
+}
+.add_holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add_task{
+    background-color: black;
+    color: white;
+    height: 30px;
+    width: 100px;
+    border-radius: 5px;
+    font-size: medium;
+    text-align: center;
+
+}
+
+.submit_holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.submit{
+    background-color: black;
+    color: white;
+    height: 30px;
+    width: 100px;
+    border-radius: 5px;
+    font-size: medium;
+    text-align: center;
+
+}
+
+/* .assign_table{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+} */
+
+
