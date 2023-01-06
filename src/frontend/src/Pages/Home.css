@@ -69,6 +69,11 @@
     font-weight: 600;
 }
 
+.policy{
+    position: absolute;
+    bottom:10;
+    right:10;
+}
 
     
 /* div{

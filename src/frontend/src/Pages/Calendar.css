@@ -21,7 +21,7 @@
 .sign_out{
     background-color: black;
     color: white;
-    height: 30px;
+    height: 50px;
     width: 100px;
     border-radius: 5px;
     font-size: small;
@@ -30,16 +30,59 @@
 }
 
 .profile_pic{
-    height: 30px;
+    height: 50px;
     padding-right: 10px;
 }
 
+.prompt{
+    margin-top: auto;
+    margin-bottom: auto;
+}
 .generate_events{
     background-color: black;
     color: white;
-    height: 30px;
+    height: 50px;
     width: 120px;
     border-radius: 5px;
     font-size: small;
     text-align: center;
+}
+
+.get_csv{
+    background-color: black;
+    color: white;
+    height: 50px;
+    width: 150px;
+    border-radius: 5px;
+    font-size: small;
+    text-align: center;
+}
+.link_row{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.link_text{
+    text-align: center;
+}
+
+.csv_link{
+    text-align: center;
+    margin:auto;
+    color: black;
+}
+.csv_link:hover{
+    color:blueviolet;
+}
+
+.footer_link{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 4px;
+    margin-right: 4px;
+    color: black;
+}
+
+.footer_link:hover{
+    color:blueviolet;
 }
