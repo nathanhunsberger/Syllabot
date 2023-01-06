@@ -1,8 +1,8 @@
-import Signin from './Signin';
 import { useState} from 'react';
 import Submission  from './Submission';
 import Dashboard from './Dashboard';
 import Calendar from './Calendar';
+import Privacy from './Privacy';
 import './Home.css'
 import logo from '../Images/basic_logo.png'
 function Home(){
@@ -68,11 +68,20 @@ function Home(){
 //    )
    if (assignments.length > 0){
     if (submitted){
-        return(<Calendar user = {user} setUser = {setUser} wipeAssignments = {wipeAssignments} />)
+        return(
+            <div>
+            <Calendar user = {user} setUser = {setUser} wipeAssignments = {wipeAssignments} />
+            <Privacy className='policy'/>
+            </div>
+        )
+
     }else {
         return (
+            <div>
             <Dashboard assignments = {assignments} onNameChange={onNameChange} onDateChange = {onDateChange} onDelete = {onDelete} onAdd = {onAdd} 
             onSubmit = {onSubmit}/>
+            <Privacy className='policy'/>
+            </div>
         );
     }
    }
@@ -114,7 +123,8 @@ function Home(){
                 <p>Please reach out! We want to hear directly from students and professors as</p>
                 it helps us to improve the platform and make life a little more organized
                 <p>jonah, ben, and nate :)</p>
-            </div>
+                <Privacy className='policy'/>
+            </div> 
         );
                 
                 

@@ -1,0 +1,13 @@
+.priv_link{
+    margin: auto;
+    color: black;
+    text-decoration: none;
+}
+.link_holder{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.priv_link:hover{
+    color: blueviolet;
+}
