@@ -95,13 +95,17 @@ function Home(){
 
                 {/* <div className='middle_row'/> */}
                 <div className = 'middle_row'>
+                    <div className='mission_container'>
                     <h1 className='header_message'>
                         Upload your syllabus.
                     </h1>
                     <h1 className='header_message'>
                         We'll make it useful.
                     </h1>
+                    </div>
+                    <div className='upload_container'>
                     <Submission assignments = {assignments} onChange = {handleAssignmets}/>
+                    </div>
                 </div>
                 <br></br>
                 <div className = 'boxes_row'>
@@ -125,18 +129,6 @@ function Home(){
                 <p>jonah, ben, and nate :)</p>
                 <Privacy className='policy'/>
             </div> 
-        );
-                
-                
-                {/* <Signin profile = {profile} onChange = {handleProfile}/>
-                {
-                    profile && profile.email &&
-                    <button
-                        onClick = {() =>{
-                            setConfirmed(true);
-                        }}>Submit a Syllabus
-                    </button>
-                } */}
-            
+        );      
     }
 }export default Home;
