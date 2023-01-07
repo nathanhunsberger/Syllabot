@@ -1,36 +1,49 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import axios from 'axios';
 import OriginalPdf from '../Components/OriginalPdf';
 import './Submission.css'
 
     function Submission(props){
-    const [pdf,setPdf] = useState(null);
+
+    const [pdf, setPdf] = useState(null);
+    var tried = false;
     const [pdfError, setPdfError] = useState('');
     // const [viewPdf, setViewPdf] = useState(null);
     // const [pdfConf, setPdfConf] = useState(false);
     const fileType = ["application/pdf"];
-
-
+    useEffect(() => {
+        if (pdf){
+            SendPdf();
+        }
+    }, [pdf])
+    
+    // image is the full model, func is an azure function used to quickly test changes
+    const url_func = "https://whdxime4tk.execute-api.us-east-2.amazonaws.com/default/syllabotEndpoint";
+    const url_image = "https://ikfrjm17la.execute-api.us-east-2.amazonaws.com/default/syllabot-image";
+    
     const  SendPdf  = async () => {
-        // const res = await axios.post("https://1s4pf1fpk3.execute-api.us-east-2.amazonaws.com/beta/nocors", 
-        //     {file: pdf.substring(28)},
-        //     {headers: {
-        //         "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
-        //         "Access-Control-Allow-Origin": "*",
-        //         "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
-        //         "X-Requested-With": "*"
-        //     }});
+        // API expects job type and payload
+        const body = {
+            "payload": pdf,
+            "job": "parse"
+          }
+        const res = await axios({
+            method: 'post',
+            url: url_image,
+            data: body
+        });
+        // Sometimes the API has to reload model from S3 bucket, which timesout every now and then
+        // In this case, we resend the API call once. Only occurs for timeout (status 504)
+        if (res.status == 504){
+            if (!tried){
+                tried = true;
+                SendPdf();
+                return;
+            }
+        }
+        console.log(res.data);
         // //call API, send it to props.onChange
-        props.onChange([
-            
-                { id: 1, name: "Test 1",  date: "10/5" },
-                { id: 2, name: "Hw 2",  date: "12/20" },
-                { id: 3, name: "Essay 3", date: "11/19"},
-              
-            
-
-
-        ]);
+        props.onChange(JSON.parse(res.data.body));
     }
     
     const handlePdfChange= (e)=> {
@@ -40,9 +53,13 @@ import './Submission.css'
                 let reader = new FileReader();
                 reader.readAsDataURL(selectedFile);
                 reader.onloadend = (e) => {
-                    setPdf(e.target.result);
+                    var pdf_file = e.target.result.substring(28);
+                    while (pdf_file.length % 4 != 0){
+                        pdf_file = pdf_file.concat('=')
+                    }
+                    setPdf(pdf_file);
                     setPdfError('');
-                    SendPdf();
+                  
                 }
             }else{
                 setPdf(null)
