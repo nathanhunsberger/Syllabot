@@ -1,16 +1,19 @@
 .upload{
     position: absolute;
-    align-items: right;
-    top: 40%;
-    right: 30%;
     background-color: black;
     color: white;
-    height: 40px;
-    width: 140px;
+    height: 50px;
+    width: 120px;
     border-radius: 5px;
     font-size: large;
     text-align: center;
-    padding-top: 15px;
+    margin: auto;
+    top:25%;
+}
+
+.submission{
+    background-color: brown;
+    position: relative;
 }
 .error_message{
     color: red;
@@ -20,4 +23,6 @@
 }
 input[type="file"] {
     display: none;
+    
 }
+
