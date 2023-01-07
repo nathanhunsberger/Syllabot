@@ -22,29 +22,45 @@
 }
 
 .middle_row{
-    position: relative;
-    height: 80px;
+   display: flex;
+    height: 150px;
     /* background-color: aqua; */
+    justify-content: center;
+    align-content: center;
+}
+
+
+.upload_container{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .header_message{
     font-size: xx-large;
     font-weight: 400;
-    text-align: left;
-    margin-left: 30%;
+    text-align: center;
+
 }
 
 .boxes_row{
-    height: 280px;
-    position: relative;
+    height: 220px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
     
 }
 .info_box{
-    height: 80%;
-    width: 18%;
+    height: 220px;
+    overflow: hidden;
+    width: 18%; 
     background-color: gray;
     position: absolute;
-    top: 20%;
+    /* top: 20%; */
     padding: 10px;
 }
 .left_box{
@@ -74,10 +90,3 @@
     bottom:10;
     right:10;
 }
-
-    
-/* div{
-    margin: 0px;
-    padding: 0px;
-    background-color: white;
-} */

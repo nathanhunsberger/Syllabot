@@ -52,16 +52,6 @@ import './Submission.css'
             console.log('Select your file');
         }
     }
-
-    // const handlePdfSubmit = (e) => {
-    //     e.preventDefault();
-    //     if(pdf != null){
-    //         setViewPdf(pdf);
-
-    //     }else{
-    //         setViewPdf(null);
-    //     }
-    // }
     
     //Come back and tighten up submission page syling for position
         return (
@@ -72,33 +62,7 @@ import './Submission.css'
                     />
                     Upload
                 </label>
-                <p className = 'error_message'>{pdfError}</p>
+                {/* <p className = 'error_message'>{pdfError}</p> */}
             </div>
-        );
-    
-        // return (
-        //     <div className = 'container'>
-        //         {/*<img src = {logo}/>*/}
-        //         <form className= 'form-group' onSubmit ={handlePdfSubmit}>
-        //             <input type = 'file' className = 'form-group'
-        //             required onChange ={handlePdfChange}
-        //             />
-        //             <br></br>
-        //             {pdfError&&<div className='error-msg'>{pdfError}</div>}
-        //         </form>
-        //         <br></br>
-        //         <br></br>
-        //         {/* {viewPdf &&
-        //         <div>
-        //         <button type = "submit" className = 'submit-btn' onClick={SendPdf}>
-        //         Confirm Your Syllabus
-        //         </button> */}
-        //         {/* <div className="pdf-container">
-        //             <OriginalPdf viewPdf={viewPdf}/>
-        //         </div> */}
-                
-        //         {/* </div>
-        //         }        */}
-        //     </div>
-        // );                   
+        );                  
     } export default Submission;
