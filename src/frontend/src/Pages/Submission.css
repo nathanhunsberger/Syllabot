@@ -2,13 +2,14 @@
     position: absolute;
     background-color: black;
     color: white;
-    height: 50px;
+    height: 40px;
     width: 120px;
     border-radius: 5px;
     font-size: large;
     text-align: center;
     margin: auto;
     top:25%;
+    padding-top: 15px;
 }
 
 .submission{
