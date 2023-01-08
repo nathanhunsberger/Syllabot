@@ -40,6 +40,8 @@ import './Submission.css'
                 SendPdf();
                 return;
             }
+        } else if (res.status == 200){
+            tried = false;
         }
         console.log(res.data);
         // call API, send it to props.onChange
