@@ -42,8 +42,13 @@ import './Submission.css'
             }
         }
         console.log(res.data);
-        // //call API, send it to props.onChange
+        // call API, send it to props.onChange
         props.onChange(JSON.parse(res.data.body));
+
+        // Weird issue with multiple uploads
+        // This doesn't fix it
+        setPdf(null);
+
     }
     
     const handlePdfChange= (e)=> {
