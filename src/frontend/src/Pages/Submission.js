@@ -44,12 +44,15 @@ import './Submission.css'
             tried = false;
         }
         console.log(res.data);
+  
         // call API, send it to props.onChange
-        props.onChange(JSON.parse(res.data.body));
+        props.onChange(JSON.parse(res.data.body), () => {
+            // Weird issue with multiple uploads
+            // This doesn't fix it
+            setPdf(null);
+        });
 
-        // Weird issue with multiple uploads
-        // This doesn't fix it
-        setPdf(null);
+  
 
     }
     

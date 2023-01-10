@@ -55,6 +55,7 @@ function Home(){
 
    function wipeAssignments(){
     setAssignments([]);
+    setSubmitted(false);
    }
 
    function handleAssignmets(a){
