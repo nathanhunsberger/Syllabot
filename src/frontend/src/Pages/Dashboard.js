@@ -1,12 +1,11 @@
 import logo from '../Images/basic_logo.png'
 import './Dashboard.css'
 import TableRow from '../Components/TableRow'
+import { useState } from 'react';
  
 
 function Dashboard(props){
-
-
-
+    const [curClassName, setcurClassName] = useState("");
     return (
     
     <div>
@@ -18,7 +17,9 @@ function Dashboard(props){
             <p className='bottom_header'>Please add a course title and click any box to edit</p>
         </div>
         <div className = 'class_holder'>
-            <input className='class_input' type= 'text' placeholder='[Enter Course Title Here]'>
+            <input className='class_input' type= 'text' placeholder='[Enter Course Title Here]' onChange = {(e) =>{
+                setcurClassName(e.target.value);
+            }}>
             </input>
         </div>
         <br></br>
@@ -37,6 +38,7 @@ function Dashboard(props){
         <br></br>
         <div className='submit_holder'>
             <button className='submit' onClick = {() =>{
+                props.onClassNameChange(curClassName);
                 props.onSubmit()
             }}>submit!</button>
         </div>

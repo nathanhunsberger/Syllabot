@@ -42,7 +42,7 @@
     background-color: black;
     color: white;
     height: 50px;
-    width: 120px;
+    width: 150px;
     border-radius: 5px;
     font-size: small;
     text-align: center;
@@ -86,3 +86,4 @@
 .footer_link:hover{
     color:blueviolet;
 }
+

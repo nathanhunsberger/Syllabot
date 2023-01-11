@@ -17,44 +17,41 @@ import './Submission.css'
         }
     }, [pdf])
     
-    // image is the full model, func is an azure function used to quickly test changes
-    const url_func = "https://whdxime4tk.execute-api.us-east-2.amazonaws.com/default/syllabotEndpoint";
-    const url_image = "https://ikfrjm17la.execute-api.us-east-2.amazonaws.com/default/syllabot-image";
-    
-    const  SendPdf  = async () => {
-        // API expects job type and payload
-        const body = {
-            "payload": pdf,
-            "job": "parse"
-          }
-        const res = await axios({
-            method: 'post',
-            url: url_image,
-            data: body
-        });
-        // Sometimes the API has to reload model from S3 bucket, which timesout every now and then
-        // In this case, we resend the API call once. Only occurs for timeout (status 504)
-        if (res.status == 504){
-            if (!tried){
-                tried = true;
-                SendPdf();
-                return;
-            }
-        } else if (res.status == 200){
-            tried = false;
+     // image is the full model, func is an azure function used to quickly test changes
+     const url_func = "https://whdxime4tk.execute-api.us-east-2.amazonaws.com/default/syllabotEndpoint";
+     const url_image = "https://ikfrjm17la.execute-api.us-east-2.amazonaws.com/default/syllabot-image";
+     
+     const  SendPdf  = async () => {
+         // API expects job type and payload
+         const body = {
+             "payload": pdf,
+             "job": "parse"
+           }
+         const res = await axios({
+             method: 'post',
+             url: url_image,
+             data: body
+         });
+         // Sometimes the API has to reload model from S3 bucket, which timesout every now and then
+         // In this case, we resend the API call once. Only occurs for timeout (status 504)
+         if (res.status == 504){
+             if (!tried){
+                 tried = true;
+                 SendPdf();
+                 return;
+             }
+         } else if (res.status == 200){
+             tried = false;
+         }
+         console.log(res.data);
+   
+         // call API, send it to props.onChange
+         props.onChange(JSON.parse(res.data.body), () => {
+             // Weird issue with multiple uploads
+             // This doesn't fix it
+             setPdf(null);
+         });
         }
-        console.log(res.data);
-  
-        // call API, send it to props.onChange
-        props.onChange(JSON.parse(res.data.body), () => {
-            // Weird issue with multiple uploads
-            // This doesn't fix it
-            setPdf(null);
-        });
-
-  
-
-    }
     
     const handlePdfChange= (e)=> {
         let selectedFile = e.target.files[0];
