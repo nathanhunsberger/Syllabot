@@ -7,14 +7,10 @@
 
 
 .tableRow{
-    /* background-color: lightgray; */
     display: flex;
-     position: relative;
+    position: relative;
     justify-content: center;
     align-content: center;
-    /* margin :auto;
-    width: 30%;
-    /* z-index: -1; */ 
 }
 
 
@@ -28,5 +24,4 @@
     width:12.5%;
     padding: 0;
     margin: 0;
-    /* background-color: blue; */
 }

@@ -21,15 +21,10 @@ import './Submission.css'
         //         "X-Requested-With": "*"
         //     }});
         // //call API, send it to props.onChange
-        props.onChange([
-            
-                { id: 1, name: "Test 1",  date: "10/5" },
-                { id: 2, name: "Hw 2",  date: "12/20" },
-                { id: 3, name: "Essay 3", date: "11/19"},
-              
-            
-
-
+        props.onChange([      
+                { id: 1, name: "Test 1",  date: "2023-01-20" },
+                { id: 2, name: "Hw 2",  date: "2023-03-19" },
+                { id: 3, name: "Essay 3", date: "2023-05-20"},
         ]);
     }
     

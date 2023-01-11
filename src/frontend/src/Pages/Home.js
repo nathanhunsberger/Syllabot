@@ -5,6 +5,7 @@ import Calendar from './Calendar';
 import Privacy from './Privacy';
 import './Home.css'
 import logo from '../Images/basic_logo.png'
+
 function Home(){
     
    
@@ -17,11 +18,15 @@ function Home(){
     );
     const [numAssignments, setNumAssignments] = useState(0);
     const [submitted, setSubmitted] = useState(false);
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(false);
+    const [ClassName, setClassName] = useState("")
 
 
+    function onClassNameChange(e){
+        setClassName(e);
+    }
     function onNameChange(e,index){
-        let newArr = [...assignments]
+        let newArr = [...assignments];
         newArr[index].name = e;
         setAssignments(newArr);
         
@@ -45,22 +50,21 @@ function Home(){
         })
         setAssignments(newArr);
     }
-//    function handleProfile(p){
-//      setProfile(p)
-//    }
-
-   function onSubmit(){
+   function onSubmit(e){
     setSubmitted(true);
    }
 
    function wipeAssignments(){
     setAssignments([]);
+    setSubmitted(false);
    }
 
-   function handleAssignmets(a){
+   function handleAssignments(a){
     setAssignments(a);
     setNumAssignments(a.length);
    }
+
+
 //    return (
 //     <div>
 //         <Dashboard assignments = {assignments}/>
@@ -70,7 +74,7 @@ function Home(){
     if (submitted){
         return(
             <div>
-            <Calendar user = {user} setUser = {setUser} wipeAssignments = {wipeAssignments} />
+            <Calendar assignments={assignments} user = {user} setUser = {setUser} wipeAssignments = {wipeAssignments} ClassName = {ClassName} />
             <Privacy className='policy'/>
             </div>
         )
@@ -79,7 +83,7 @@ function Home(){
         return (
             <div>
             <Dashboard assignments = {assignments} onNameChange={onNameChange} onDateChange = {onDateChange} onDelete = {onDelete} onAdd = {onAdd} 
-            onSubmit = {onSubmit}/>
+            onSubmit = {onSubmit} onClassNameChange={onClassNameChange}/>
             <Privacy className='policy'/>
             </div>
         );
@@ -104,7 +108,7 @@ function Home(){
                     </h1>
                     </div>
                     <div className='upload_container'>
-                    <Submission assignments = {assignments} onChange = {handleAssignmets}/>
+                    <Submission assignments = {assignments} onChange = {handleAssignments}/>
                     </div>
                 </div>
                 <br></br>

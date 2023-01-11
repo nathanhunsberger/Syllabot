@@ -57,18 +57,19 @@
 .info_box{
     height: 220px;
     overflow: hidden;
-    width: 18%; 
+    width: 300px;
     background-color: gray;
     position: absolute;
     /* top: 20%; */
-    padding: 10px;
+    padding-left: 5px;
+    padding-top: 0;
 }
 .left_box{
-    left: 25%; 
+    margin-right: 500px;
 }
 
 .right_box{
-    left: 55%;
+    margin-left: 500px;
 }
 
 .title {
@@ -77,8 +78,10 @@
     font-weight: bold;
     text-align: left;
     font-style: italic;
+    padding-top: 0;
 }
 .content {
+    padding-top: 0;
     font-size: 17pt;
     color: white;
     text-align: left;
