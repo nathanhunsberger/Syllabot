@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-import OriginalPdf from '../Components/OriginalPdf';
 import './Submission.css'
 
     function Submission(props){
@@ -8,8 +7,6 @@ import './Submission.css'
     const [pdf, setPdf] = useState(null);
     var tried = false;
     const [pdfError, setPdfError] = useState('');
-    // const [viewPdf, setViewPdf] = useState(null);
-    // const [pdfConf, setPdfConf] = useState(false);
     const fileType = ["application/pdf"];
     useEffect(() => {
         if (pdf){
@@ -22,6 +19,7 @@ import './Submission.css'
      const url_image = "https://ikfrjm17la.execute-api.us-east-2.amazonaws.com/default/syllabot-image";
      
      const  SendPdf  = async () => {
+        props.setLoad(true);
          // API expects job type and payload
          const body = {
              "payload": pdf,
@@ -77,7 +75,6 @@ import './Submission.css'
         }
     }
     
-    //Come back and tighten up submission page syling for position
         return (
             <div className = 'submission'>
                 <label className="upload">
@@ -86,7 +83,6 @@ import './Submission.css'
                     />
                     Upload
                 </label>
-                {/* <p className = 'error_message'>{pdfError}</p> */}
             </div>
         );                  
     } export default Submission;
