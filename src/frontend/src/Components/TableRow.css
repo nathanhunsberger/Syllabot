@@ -20,6 +20,10 @@
     font-size: 8pt;
 }
 
+.delete:hover{
+    background-color: #333333;
+}
+
 .header{
     width:12.5%;
     padding: 0;

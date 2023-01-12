@@ -3,6 +3,7 @@ import Submission  from './Submission';
 import Dashboard from './Dashboard';
 import Calendar from './Calendar';
 import Privacy from './Privacy';
+import Loading from './Loading';
 import './Home.css'
 import logo from '../Images/basic_logo.png'
 
@@ -20,6 +21,7 @@ function Home(){
     const [submitted, setSubmitted] = useState(false);
     const [user, setUser] = useState(false);
     const [ClassName, setClassName] = useState("")
+    const [load, setLoad] = useState(false)
 
 
     function onClassNameChange(e){
@@ -38,9 +40,14 @@ function Home(){
         setAssignments(newArr);
     }
     function onDelete(index){
-        let newArr = [...assignments]
-        newArr.splice(index,1);
-        setAssignments(newArr);
+        if (assignments.length <= 1){
+            wipeAssignments();
+        }else {
+            let newArr = [...assignments]
+            newArr.splice(index,1);
+            setAssignments(newArr);
+        }
+        
     }
     function onAdd(){
         setNumAssignments(numAssignments + 1);
@@ -55,6 +62,7 @@ function Home(){
    }
 
    function wipeAssignments(){
+    setLoad(false);
     setAssignments([]);
     setSubmitted(false);
    }
@@ -62,6 +70,10 @@ function Home(){
    function handleAssignments(a){
     setAssignments(a);
     setNumAssignments(a.length);
+   }
+
+   function setLoadingScreen(){
+    setLoad(true);
    }
 
 
@@ -84,12 +96,17 @@ function Home(){
             <div>
             <Dashboard assignments = {assignments} onNameChange={onNameChange} onDateChange = {onDateChange} onDelete = {onDelete} onAdd = {onAdd} 
             onSubmit = {onSubmit} onClassNameChange={onClassNameChange}/>
+            <br></br>
+            <br></br>
             <Privacy className='policy'/>
             </div>
         );
     }
    }
     else {
+        if (load){
+            return (<Loading/>);
+        }else {
         return(
             <div >
                 <div className= 'basic_logo'>
@@ -108,7 +125,7 @@ function Home(){
                     </h1>
                     </div>
                     <div className='upload_container'>
-                    <Submission assignments = {assignments} onChange = {handleAssignments}/>
+                    <Submission assignments = {assignments} onChange = {handleAssignments} setLoad = {setLoadingScreen}/>
                     </div>
                 </div>
                 <br></br>
@@ -133,6 +150,7 @@ function Home(){
                 <p>jonah, ben, and nate :)</p>
                 <Privacy className='policy'/>
             </div> 
-        );      
+        );    
+        }  
     }
 }export default Home;

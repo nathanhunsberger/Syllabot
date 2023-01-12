@@ -12,6 +12,11 @@
     padding-top: 15px;
 }
 
+.upload:hover{
+
+    background-color: #333333;
+}
+
 .submission{
     background-color: brown;
     position: relative;
@@ -26,4 +31,6 @@ input[type="file"] {
     display: none;
     
 }
+
+
 
