@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
+import axiosRetry from 'axios-retry';
 import './Submission.css'
 
     function Submission(props){
@@ -18,6 +19,16 @@ import './Submission.css'
      const url_func = "https://whdxime4tk.execute-api.us-east-2.amazonaws.com/default/syllabotEndpoint";
      const url_image = "https://ikfrjm17la.execute-api.us-east-2.amazonaws.com/default/syllabot-image";
      
+     // Retry 3 times if we timeout
+     axiosRetry(axios, {
+        retries: 3,
+        shouldResetTimeout: true,
+        retryCondition: (error) => {
+            // timeouts have code 504
+            return error.response.status === 504;
+        },
+    });
+
      const  SendPdf  = async () => {
         props.setLoad(true);
          // API expects job type and payload
@@ -29,26 +40,20 @@ import './Submission.css'
              method: 'post',
              url: url_image,
              data: body
-         });
-         // Sometimes the API has to reload model from S3 bucket, which timesout every now and then
-         // In this case, we resend the API call once. Only occurs for timeout (status 504)
-         if (res.status == 504){
-             if (!tried){
-                 tried = true;
-                 SendPdf();
-                 return;
+         }).then((res) => {
+             // call API, send it to props.onChange
+            props.onChange(JSON.parse(res.data.body), () => {
+                // Weird issue with multiple uploads
+                // This doesn't fix it
+                setPdf(null);
+            });
+         }).catch((err) =>{
+             console.log('Error Occured: ' + err)
+             if (err.code == 'ERR_NETWORK'){
+                SendPdf();
              }
-         } else if (res.status == 200){
-             tried = false;
-         }
-         console.log(res.data);
-   
-         // call API, send it to props.onChange
-         props.onChange(JSON.parse(res.data.body), () => {
-             // Weird issue with multiple uploads
-             // This doesn't fix it
-             setPdf(null);
          });
+   
         }
     
     const handlePdfChange= (e)=> {
