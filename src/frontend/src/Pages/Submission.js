@@ -25,7 +25,7 @@ import './Submission.css'
         shouldResetTimeout: true,
         retryCondition: (error) => {
             // timeouts have code 504
-            return error.response.status === 504;
+            return true;
         },
     });
 
@@ -47,12 +47,15 @@ import './Submission.css'
                 // This doesn't fix it
                 setPdf(null);
             });
-         }).catch((err) =>{
-             console.log('Error Occured: ' + err)
-             if (err.code == 'ERR_NETWORK'){
-                SendPdf();
-             }
          });
+
+        // I THINK the axios-retry does this for us
+        //  .catch((err) =>{
+        //      console.log('Error Occured: ' + err)
+        //      if (err.code == 'ERR_NETWORK'){
+        //         SendPdf();
+        //      }
+        //  });
    
         }
     
