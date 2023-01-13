@@ -16,7 +16,8 @@ function Calendar(props){
 
     async function generateEvents(){
             //do gcal work here
-
+            // 4/0AWgavdcuXECRhHnTSdTE4fnHVgHxt9yv2_IcCY_Rg7bWOVtxJu66HnY_Dsp6qqT0yfVlIw
+            console.log(jwt_token)
             await axios.post("http://localhost:5000/", {
                 assignments: props.assignments,
                 className: props.ClassName,
@@ -33,6 +34,8 @@ function Calendar(props){
     const login = useGoogleLogin({
         onSuccess: codeResponse => handleSignIn(codeResponse),
         flow: 'auth-code',
+        scope: 'profile openid https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events.owned', 
+        clientId: '272508386377-kv721ehlo4rn8d7t4od86fj4au0rm6s2.apps.googleusercontent.com' // Required
       });
     return(
         <div>
